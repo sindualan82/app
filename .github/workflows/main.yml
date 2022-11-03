@@ -1,15 +1,30 @@
-name: CI
-
+name: Auto commit
 on:
-
-  workflow_dispatch:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '*/17 * * * *'
 jobs:
-  build:
+  auto_commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Modify LAST_UPDATED file
+        run: |
+          d=`date '+%Y-%m-%dT%H:%M:%SZ'`
+          echo $d > LAST_UPDATED
+      - name: Commit changes
         run: |
          git config --global user.email "sindualan82@gmail.com"
          git config --global user.name "sindualan82"
-         while :; do git commit -am tod --allow-empty; git push -u origin main; sleep 1300; done
+         git commit -am tod --allow-empty; git push -u origin main;
+      - name: Push Back
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          force: true
+          directory: '.'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
