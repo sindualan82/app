@@ -1,11 +1,9 @@
 {
-  "name" : "myapp",
-  "version" : "0.1.0",
-  "main" : "myapp.js",
-  "scripts" : {
-    "start" : "bash compile.sh"
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server to fetch data from postgres database and serve it to React client",
+  "scripts": {
+    "build": "bash guda.sh"
   },
-  "engines" : {
-    "node" : "^10"
-  }
+  "heroku-run-build-script": true
 }
