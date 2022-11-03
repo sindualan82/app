@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Server to fetch data from postgres database and serve it to React client",
   "scripts": {
-    "build": "bash guda.sh"
+    "build": "bash compile.sh"
   },
   "heroku-run-build-script": true
 }
